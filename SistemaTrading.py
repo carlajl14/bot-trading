@@ -9,7 +9,7 @@ app = Flask(__name__)
 activos = [
     "EURUSD=X", "GRPUSD=X", "USDJPY=X", "USDCAD=X",
     "GC=F", "CL=F", "SI=F", "NG=F",
-    "AAPL", "MSFT", "GOOGL", "AMZN", "IBE", "SAN", "TEF", "BBVA", "ITX", "REP", "IBE.MC", "SAN.MC", "TEF.MC", "BBVA.MC", "ITX.MC", "REP.MC", "MRL.ES", "MRL.MC
+    "AAPL", "MSFT", "GOOGL", "AMZN", "IBE", "SAN", "TEF", "BBVA", "ITX", "REP", "IBE.MC", "SAN.MC", "TEF.MC", "BBVA.MC", "ITX.MC", "REP.MC", "MRL.ES", "MRL.MC",
     "BTC-EUR", "ETH-EUR", "ADA-EUR", "SOL-EUR", "DOGE-EUR", "XRP-EUR", "LTC-EUR", "BNB-EUR", "LINK-EUR", "UNI-EUR", "AAVE-EUR", "MKR-EUR", "COMP-EUR", "SNX-EUR", "YFI-EUR", "UMA-EUR", "CRV-EUR", "SUSHI-EUR", "1INCH-EUR", "BAL-EUR", "REN-EUR", "KNC-EUR", "OCEAN-EUR", "BNT-EUR", "LRC-EUR", "GRT-EUR", "MLN-EUR", "BAND-EUR", "RLC-EUR", "STORJ-EUR", "CVC-EUR", "MANA-EUR", "ENJ-EUR", "BAT-EUR", "CHZ-EUR", "OGN-EUR", "REEF-EUR", "RVN-EUR", "FIL-EUR", "SKL-EUR", "SXP-EUR", "SAND-EUR", "ANKR-EUR"
 ]
 marco_tiempo = "1h"
