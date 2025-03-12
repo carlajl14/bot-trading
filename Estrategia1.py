@@ -60,8 +60,7 @@ class Estrategia1:
 
     __version__ = 1.0
 
-    def __init__(self) -> None:
-
+    def __init__(self, df) -> None:
         # Atributos
         self.df = df
         self.periodo_rsi = 14
@@ -74,11 +73,11 @@ class Estrategia1:
     
     def backtest(self):
         """
-        Método que obtiene el rendimiento generado or la estrategia a lo largo del tiempo
+        Método que obtiene el rendimiento generado por la estrategia a lo largo del tiempo
 
         Salida
         ......
-        return: pd.Serie: Rendimientos de la estrategia a lo largo del tiempo.
+        return: pd.Series: Rendimientos de la estrategia a lo largo del tiempo.
         """
         # Calcular
         calculo_est = self.estrategia_calculo.copy()
@@ -88,18 +87,17 @@ class Estrategia1:
 
         # Calcular rendimiento
         calculo_est["Rendimiento"] = self.df["Close"].pct_change()
-        rendimiento = (1 + calculo_est["posicion_mercado"].shift(periods=1) * calculo_est["Rendimientos"]).cumprod()
+        rendimiento = (1 + calculo_est["posicion_mercado"].shift(periods=1) * calculo_est["Rendimiento"]).cumprod()
 
         return rendimiento
     
-    # Calcular
     def calcular(self):
-         """
+        """
         Este método calculará la estrategia
 
         Salida
         ......
-        return: dict: Devuelve un diccionario si se generó una señal en la última vela , o false si no se generó nada.
+        return: dict: Devuelve un diccionario si se generó una señal en la última vela, o false si no se generó nada.
         """
         # Calcular indicadores
         datos = pd.DataFrame(index=self.df.index)
@@ -108,12 +106,12 @@ class Estrategia1:
         datos["RSI"] = RSI(self.df, periodo=self.periodo_rsi)
 
         # Generar cruces
-        datos["Cruces_MAs"] = np.where(datos[f"SMA_{self.periodo_ma_rapido}"] > datos[f"SMA_{self.periodo_ma_lento}"])
+        datos["Cruces_MAs"] = np.where(datos[f"SMA_{self.periodo_ma_rapido}"] > datos[f"SMA_{self.periodo_ma_lento}"], 1, -1)
 
         # Detectar niveles de sobrecompra y sobreventa
         datos["RSI_Señal"] = np.where(datos["RSI"] > self.sobrecompra_sobreventa, -1, np.where(datos["RSI"] < self.sobrecompra_sobreventa, 1, np.nan))
 
-        # Detectar senales
+        # Detectar señales
         datos["Señales"] = np.nan
         datos.loc[(datos["Cruces_MAs"] == 1) & (datos["RSI_Señal"] == 1), "Señales"] = 1
         datos.loc[(datos["Cruces_MAs"] == -1) & (datos["RSI_Señal"] == -1), "Señales"] = -1
@@ -124,21 +122,20 @@ class Estrategia1:
         # Revisar si hay una señal en la última vela
         if datos["Señales"].iloc[-1] == 1:
             valor = {"tendencia": "alcista"}
-        elif datos["Señales"].iloc[-1] == 1:
+        elif datos["Señales"].iloc[-1] == -1:
             valor = {"tendencia": "bajista"}
         else:
             valor = False
 
         return valor
     
-    # Optimizar
     def optimizar(self, combinaciones: list):
         """
-        Optimiza la estrategia encontrando los mejores parámteros.
+        Optimiza la estrategia encontrando los mejores parámetros.
 
         Parámetros
         ..........
-        param: list: combinaciones: Conjunto de parámtetros que se probarán en la estrategia
+        param: list: combinaciones: Conjunto de parámetros que se probarán en la estrategia
 
         Salida
         ......
@@ -173,14 +170,13 @@ class Estrategia1:
         self.periodo_ma_lento = param_originales[1]
         self.periodo_rsi = param_originales[2]
 
-        # Devolver calculos con parámetros originales
+        # Devolver cálculos con parámetros originales
         self.calcular()
 
         return resultados
     
-    # Plot
     def plot(self):
-         """
+        """
         Este método realiza el gráfico de nuestros datos
 
         Salida
@@ -202,7 +198,7 @@ class Estrategia1:
         rsi_plot.append(mpf.make_addplot(rsi_data, panel=2, color="blue", fill_between=dict(y1=nivel_sobrecompra, y2=rsi_data, where=rsi_data >= nivel_sobrecompra, alpha=0.5, color="green")))
         rsi_plot.append(mpf.make_addplot(rsi_data, panel=2, color="blue", fill_between=dict(y1=nivel_sobreventa, y2=rsi_data, where=rsi_data < nivel_sobreventa, alpha=0.5, color="red")))
 
-        mpf.plot(self.df, type="candle", style="yahoo", title="Gráfico de Velas", ylabels="Precio", volume=True, figsize=(20,10), figscale=3.0, addplot=rsi_plot, tight_layout=True, mav=(int(self.periodo_ma_rapido), int(self.periodo_ma_lento)), warn_too_much_data=self.df,shape[0], savefig="estrategia1.png")
+        mpf.plot(self.df, type="candle", style="yahoo", title="Gráfico de Velas", ylabel="Precio", volume=True, figsize=(20,10), figscale=3.0, addplot=rsi_plot, tight_layout=True, mav=(int(self.periodo_ma_rapido), int(self.periodo_ma_lento)), warn_too_much_data=self.df.shape[0], savefig="estrategia1.png")
 
 # Ejemplo
 if __name__ == "__main__":
