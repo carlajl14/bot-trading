@@ -6,8 +6,8 @@ from Estrategia1 import Estrategia1
 activos = [
     "EURUSD=X", "GRPUSD=X", "USDJPY=X", "USDCAD=X",
     "GC=F", "CL=F", "SI=F", "NG=F",
-    "AAPL", "MSFT", "GOOGL", "AMZN",
-    "BTC-USD", "ETH-USD", "ADA-USD", "SOL-USD"
+    "AAPL", "MSFT", "GOOGL", "AMZN", "IBE", "SAN", "TEF", "BBVA", "ITX", "REP", "IBE.MC", "SAN.MC", "TEF.MC", "BBVA.MC", "ITX.MC", "REP.MC", "BTC-USD", "ETH-USD", "ADA-USD", "SOL-USD", "DOGE-USD", "XRP-USD", "LTC-USD", "BNB-USD", "LINK-USD", "UNI-USD", "AAVE-USD", "MKR-USD", "COMP-USD", "SNX-USD", "YFI-USD", "UMA-USD", "CRV-USD", "SUSHI-USD", "1INCH-USD", "BAL-USD", "REN-USD", "KNC-USD", "OCEAN-USD", "BNT-USD", "LRC-USD", "GRT-USD", "MLN-USD", "BAND-USD", "RLC-USD", "STORJ-USD", "CVC-USD", "MANA-USD", "ENJ-USD", "BAT-USD", "CHZ-USD", "OGN-USD", "REEF-USD", "RVN-USD", "FIL-USD", "SKL-USD", "SXP-USD", "SAND-USD", "ANKR-USD", "CRV-USD", "1INCH-USD", "BAL-USD", "REN-USD", "KNC-USD", "OCEAN-USD", "BNT-USD", "LRC-USD", "GRT-USD", "MLN-USD", "BAND-USD", "RLC-USD", "STORJ-USD", "CVC-USD", "MANA-USD", "ENJ-USD", "BAT-USD", "CHZ-USD", "OGN-USD", "REEF-USD", "RVN-USD", "FIL-USD", "SKL-USD", "SXP-USD", "SAND-USD", "ANKR-USD",
+    "BTC-EUR", "ETH-EUR", "ADA-EUR", "SOL-EUR", "DOGE-EUR", "XRP-EUR", "LTC-EUR", "BNB-EUR", "LINK-EUR", "UNI-EUR", "AAVE-EUR", "MKR-EUR", "COMP-EUR", "SNX-EUR", "YFI-EUR", "UMA-EUR", "CRV-EUR", "SUSHI-EUR", "1INCH-EUR", "BAL-EUR", "REN-EUR", "KNC-EUR", "OCEAN-EUR", "BNT-EUR", "LRC-EUR", "GRT-EUR", "MLN-EUR", "BAND-EUR", "RLC-EUR", "STORJ-EUR", "CVC-EUR", "MANA-EUR", "ENJ-EUR", "BAT-EUR", "CHZ-EUR", "OGN-EUR", "REEF-EUR", "RVN-EUR", "FIL-EUR", "SKL-EUR", "SXP-EUR", "SAND-EUR", "ANKR-EUR", "CRV-EUR", "1INCH-EUR", "BAL-EUR", "REN-EUR", "KNC-EUR", "OCEAN-EUR", "BNT-EUR", "LRC-EUR", "GRT-EUR", "MLN-EUR", "BAND-EUR", "RLC-EUR", "STORJ
 ]
 marco_tiempo = "1h"
 
@@ -37,5 +37,5 @@ def ejecutar_estrategia(activos: list, marco_tiempo: str, parametros_optimizados
         time.sleep(60 * 60)
 
 # Ejecutar la estrategia en diferentes activos
-parametros_optimizados = [12, 27, 14]
+parametros_optimizados = [20, 50, 14]
 ejecutar_estrategia(activos=activos, marco_tiempo=marco_tiempo, parametros_optimizados=parametros_optimizados)
