@@ -13,8 +13,8 @@ def RSI(df: pd.DataFrame, periodo: int = 14) -> pd.Series:
     Perdida = np.abs(Delta.where(Delta < 0, 0))
 
     # Valores en la posición del periodo, utilizando una media exponencial ponderada
-    ganancia_promedio = Ganancia.evm(alpha = 1 / periodo, min_periods = periodo).mean()
-    perdida_promedio = Perdida.evm(alpha = 1 / periodo, min_periods = periodo).mean()
+    ganancia_promedio = Ganancia.ewm(alpha = 1 / periodo, min_periods = periodo).mean()
+    perdida_promedio = Perdida.ewm(alpha = 1 / periodo, min_periods = periodo).mean()
 
     RS = ganancia_promedio / perdida_promedio
     RSI = pd.Series(np.where(RS == 0, 100, 100 - (100 / (1 + RS))), name = "RSI", index= df.index)
